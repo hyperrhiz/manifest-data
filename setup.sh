@@ -8,3 +8,4 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 OUT=$DIR/.ids
 id -u > $OUT
 id -g >> $OUT
+echo 'Setup complete!'

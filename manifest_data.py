@@ -54,7 +54,7 @@ def get_external_ip():
 	pings external website to get external ip address
 	to replace internal ip address in file output
 	"""
-	url = 'http://ifconfig.co'
+	url = 'http://ifconfig.me'
 	headers = {'User-Agent': 'curl/'}
 	request = urllib2.Request(url, headers=headers)
 	r = urllib2.urlopen(request)
