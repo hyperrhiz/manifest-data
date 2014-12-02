@@ -19,6 +19,8 @@ parser = ArgumentParser()
 parser.add_argument('-o', '--output', dest="output", action="store",
 					default=os.path.join(os.path.dirname(__file__), 'tcpflow'), 
 					help="Sets output folder for TCPflow files.")
+parser.add_argument('-i', '--interface', dest="iface", action="store",
+					default="en1", help="Sets networking interface adapter.")
 args = parser.parse_args()
 
 ###########################################################
@@ -94,7 +96,7 @@ def main():
 	print("starting tcpflow... you are being watched.")
 	print('press ctrl-c to exit\n')
 	try:
-		subprocess.call('tcpflow -a -Ft -o {0} -i en1'.format(args.output), shell=True)
+		subprocess.call('/usr/local/bin/tcpflow -a -Ft -o {0} -i {1}'.format(args.output, args.iface), shell=True)
 	except KeyboardInterrupt:
 		print('Cleaning up...')
 		fix_filenames(internal_ip, external_ip, args.output)
