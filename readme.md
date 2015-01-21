@@ -18,7 +18,7 @@ FOR MAC ONLY
 
 Installation
 -------------
-To install tcpflow and scripts for this project open a terminal and enter the following command:
+To install tcpflow and scripts for this project download and mount the DMG installer. Open a terminal and enter the following command:
 sh /Volumes/MANIFESTD/install.sh
 
 You will be prompted to enter your password for the install to proceed.
