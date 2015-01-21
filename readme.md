@@ -47,6 +47,10 @@ or
 sudo python /path/to/manifest-data/scripts/manifest_data.py
 
 You will be prompted to enter your admin password every time you run this. This will create a folder called "tcpflow" in the application directory where it will save all the files. You can delete these whenever you want.
+
+Additional options:
+-o = set custom output folder for tcpflow data
+-i = set custom networking interface. Default is en1. If you run into errors, you may need to change this to en0 or eth0. Open a terminal and run ifconfig to see which adapter is in use and specify it here.
 -----------------------------------------------------
 
 Parsing
