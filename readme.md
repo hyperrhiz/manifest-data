@@ -49,8 +49,8 @@ sudo python /path/to/manifest-data/scripts/manifest_data.py
 You will be prompted to enter your admin password every time you run this. This will create a folder called "tcpflow" in the application directory where it will save all the files. You can delete these whenever you want.
 
 Additional options:
--o = set custom output folder for tcpflow data
--i = set custom networking interface. Default is en1. If you run into errors, you may need to change this to en0 or eth0. Open a terminal and run ifconfig to see which adapter is in use and specify it here.
+* -o = set custom output folder for tcpflow data
+* -i = set custom networking interface. Default is en1. If you run into errors, you may need to change this to en0 or eth0. Open a terminal and run ifconfig to see which adapter is in use and specify it here.
 -----------------------------------------------------
 
 Parsing
@@ -61,6 +61,6 @@ python /Applications/Manifest_Data/parse_data.py
 You have two options for parsing the data. Running it like this creates a .xyz file that can be used to create a 3D model. Adding the -g flag will attempt to geolocate the IP addresses and output an html file with a google map in it. This requires that you download the database from [https://lite.ip2location.com/database-ip-country-region-city-latitude-longitude-zipcode-timezone](https://lite.ip2location.com/database-ip-country-region-city-latitude-longitude-zipcode-timezone)
 
 Additional options:
--o = specify custom output filename
--i = specify custom tcpflow input directory
--v = prints out more information
+* -o = specify custom output filename
+* -i = specify custom tcpflow input directory
+* -v = prints out more information
