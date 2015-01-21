@@ -11,7 +11,7 @@ License: Creative Commons BY-SA 3.0 [http://creativecommons.org/licenses/by-sa/3
 This project uses geolocation data derived from [http://www.ip2location.com](http://www.ip2location.com).
 
 This project also uses pygmaps, distributed under the Apache 2.0 license.
-
+---------------------------------------------------------------------------------------------------------------------------
 DMG installer
 --------------
 FOR MAC ONLY
@@ -26,12 +26,25 @@ You will be prompted to enter your password for the install to proceed.
 You will also need to install the X11 framework. You can download it here.
 http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg
 
------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
+## Linux Installation ##
+Clone/download repository.
+
+Run setup.sh.
+
+In a terminal, install dependencies by running:
+sudo apt-get -y install tcpflow 
+
+--------------------------------------------------------------------------------------------------------------
+
 
 Running
 -------------
 Open a terminal and run the following command:
 sudo python /Applications/Manifest_Data/manifest_data.py
+
+or
+sudo python /path/to/manifest-data/scripts/manifest_data.py
 
 You will be prompted to enter your admin password every time you run this. This will create a folder called "tcpflow" in the application directory where it will save all the files. You can delete these whenever you want.
 -----------------------------------------------------
