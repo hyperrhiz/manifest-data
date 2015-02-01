@@ -1,8 +1,8 @@
 #!/bin/bash
 
 ## Author: 	Luke Caldwell
-## License: Creative Commons BY-SA 3.0
-##			http://creativecommons.org/licenses/by-sa/3.0/
+## License: Creative Commons BY-NC-SA 4.0
+##			http://creativecommons.org/licenses/by-nc-sa/4.0/
 
 ## Setup ids for resetting file permissions
 DIR=$(dirname "$0")

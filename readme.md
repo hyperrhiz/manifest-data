@@ -6,7 +6,7 @@ Duke University S-1 Speculative Sensation Lab
 
 [http://s-1lab.org](http://s-1lab.org)
 
-License: Creative Commons BY-SA 3.0 [http://creativecommons.org/licenses/by-sa/3.0/](http://creativecommons.org/licenses/by-sa/3.0/)
+License: Creative Commons BY-NC-SA 4.0 [http://creativecommons.org/licenses/by-nc-sa/4.0/](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 This project uses geolocation data derived from [http://www.ip2location.com](http://www.ip2location.com).
 
@@ -30,10 +30,9 @@ http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg
 ## Linux Installation ##
 Clone/download repository.
 
-Run setup.sh.
+Run linux_setup.sh.
 
-In a terminal, install dependencies by running:
-sudo apt-get -y install tcpflow 
+This will install tcpflow and other dependencies.
 
 --------------------------------------------------------------------------------------------------------------
 
@@ -58,7 +57,7 @@ Parsing
 To parse the IP addresses from the files, run the following command in a terminal:
 python /Applications/Manifest_Data/parse_data.py
 
-You have two options for parsing the data. Running it like this creates a .xyz file that can be used to create a 3D model. Adding the -g flag will attempt to geolocate the IP addresses and output an html file with a google map in it. This requires that you download the database from [https://lite.ip2location.com/database-ip-country-region-city-latitude-longitude-zipcode-timezone](https://lite.ip2location.com/database-ip-country-region-city-latitude-longitude-zipcode-timezone)
+You have two options for parsing the data. Running with defaults creates a .xyz file that can be used to create a 3D model. Adding the -g flag will attempt to geolocate the IP addresses and output an html file with a google map in it. This requires that you download the database from [https://lite.ip2location.com/database-ip-country-region-city-latitude-longitude-zipcode-timezone](https://lite.ip2location.com/database-ip-country-region-city-latitude-longitude-zipcode-timezone)
 
 Additional options:
 * -o = specify custom output filename
