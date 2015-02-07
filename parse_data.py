@@ -105,6 +105,22 @@ class XYZData:
         d = dict((k, int(v.replace('.', ''))) for k, v in kwargs.iteritems())
         self.__dict__.update(d)
 
+class LocData:
+    """
+    data wrapper for geolocation data
+    """
+
+    def __init__(self, **kwargs):
+        self.orig = self.str_format(kwargs['orig'])
+        self.dest = self.str_format(kwargs['dest'])
+
+    def str_format(self, s):
+        """
+        strips leading 0 from IP address blocks
+        """
+        a = s.split('.')
+        return '.'.join([z.lstrip('0') for z in a])
+
 
 def split_name(f):
     """
@@ -116,21 +132,30 @@ def split_name(f):
     return None
 
 
-def parse_filenames(files):
+def parse_filenames(files, text):
     """
     parse timestamp, origin ip address and port, destination ip address and port;
     divide origin ip address by origin port, destination ip address by dest port;
     shuffle columns and rejoin with new lines
+    :param files: list of filenames
+    :param text: bool for text or model output
     """
 
     s = []
     for f in files:
         dct = split_name(f)
         if dct:
-            o = XYZData(**dct)
-            q = [o.ts, o.orig/o.orig_port, o.dest/o.dest_port]
-            random.shuffle(q)
-            s.append((' '.join((str(n) for n in q))))
+            if text:
+                o = LocData(**dct)
+                q = ",".join((o.orig, o.dest))
+                # remove duplicates to ease server processing
+                if q not in s:
+                    s.append(q)
+            else:
+                o = XYZData(**dct)
+                q = [o.ts, o.orig/o.orig_port, o.dest/o.dest_port]
+                random.shuffle(q)
+                s.append((' '.join((str(n) for n in q))))
     return '\n'.join(s)
 
 
@@ -141,13 +166,7 @@ def main():
         raise Exception("No files to look at. Run tcpflow before parsing.")
     files = [os.path.basename(f) for f in files]
 
-    #   Prepare txt list of filenames for geolocation on site
-    if args.txt:
-        output = '\n'.join(files)
-
-    #   Parses filenames for .xyz file
-    else:
-        output = parse_filenames(files)
+    output = parse_filenames(files, args.txt)
 
     if output:
         logger(output)
