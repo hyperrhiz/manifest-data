@@ -13,12 +13,15 @@ import os
 import re
 import random
 from uuid import uuid4
-from flask import Flask, render_template, request
+import glob
+from flask import Flask, render_template, request, send_from_directory
 import IP2Location
 import pygmaps
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 6 * 1024 * 1024
+app.config['STATIC_FILES'] = os.path.join(os.path.dirname(__file__), 'static')
+app.config['GAL_DIR'] = os.path.join(app.config['STATIC_FILES'], 'gallery')
 
 
 @app.route('/')
@@ -31,17 +34,29 @@ def google_map_form():
     if request.method == 'POST':
         file = request.files.get('file')
         if file:
-            keep = request.post.get('keep')
+            keep = request.form.get('keep')
             data = file.read().split()
             output = geolocate_ips(data, keep)
             return render_template('map_output.html', output=output)
     else:
         return render_template('file_upload.html')
 
+@app.route('/gallery')
+def map_gallery():
+    gal_dir = os.path.join(app.config['GAL_DIR'], '*.html')
+    print(gal_dir)
+    files = [os.path.basename(f) for f in glob.glob(gal_dir)]
+    return render_template('gallery.html', links=files)
+
 
 regex_validator = re.compile('^{r}\.{r}\.{r}\.{r},'
                              '{r}\.{r}\.{r}\.{r}$'.format(r='\d{1,3}')
 )
+
+# @app.route('/gallery/<path:filename>')
+# def serve_static_map(filename):
+#     print(app.config['GAL_DIR'])
+#     return send_from_directory(app.config['GAL_DIR'], filename)
 
 
 def geolocate_ips(files, keep):
@@ -86,7 +101,7 @@ def geolocate_ips(files, keep):
                     </body>
                 </html>"""
     if keep:
-        output = os.path.join(os.path.dirname(__file__), 'static/gallery',
+        output = os.path.join(app.config['GAL_DIR'],
                               str(uuid4()) + '.html')
         mymap.draw(output)
         #	for attribution of IP data
@@ -95,7 +110,7 @@ def geolocate_ips(files, keep):
         with open(output, 'rb') as fi:
             html = fi.read()
     else:
-        output = os.path.join(os.path.dirname(__file__), 'tmp', uuid4())
+        output = os.path.join(os.path.dirname(__file__), 'tmp', str(uuid4()))
         mymap.draw(output)
 
         #	for attribution of IP data
