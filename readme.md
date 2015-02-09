@@ -18,19 +18,23 @@ FOR MAC ONLY
 
 Installation
 -------------
-To install tcpflow and scripts for this project download and mount the DMG installer. Open a terminal and enter the following command:
+To install tcpflow and scripts for this project download and mount [https://bitbucket.org/swibble/manifest-data/downloads/manifest-data.dmg](the DMG installer). Open a terminal and enter the following command:
 sh /Volumes/MANIFESTD/install.sh
 
 You will be prompted to enter your password for the install to proceed.
 
 You will also need to install the X11 framework. You can download it here.
-http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg
+[http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg](http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg)
 
 --------------------------------------------------------------------------------------------------------------
 ## Linux Installation ##
 Clone/download repository.
 
-Run linux_setup.sh.
+Install git
+sudo apt-get update && sudo apt-get -y install git
+git clone https://bitbucket.org/swibble/manifest-data ~/manifest-data
+
+Run ~/manifest-data/linux_setup.sh
 
 This will install tcpflow and other dependencies.
 
@@ -43,21 +47,23 @@ Open a terminal and run the following command:
 sudo python /Applications/Manifest_Data/manifest_data.py
 
 or
-sudo python /path/to/manifest-data/scripts/manifest_data.py
+sudo python /path/to/manifest-data/manifest_data.py
 
 You will be prompted to enter your admin password every time you run this. This will create a folder called "tcpflow" in the application directory where it will save all the files. You can delete these whenever you want.
 
 Additional options:
 * -o = set custom output folder for tcpflow data
-* -i = set custom networking interface. Default is en1. If you run into errors, you may need to change this to en0 or eth0. Open a terminal and run ifconfig to see which adapter is in use and specify it here.
+
 -----------------------------------------------------
 
 Parsing
 ------------
 To parse the IP addresses from the files, run the following command in a terminal:
 python /Applications/Manifest_Data/parse_data.py
+or
+python ~/manifest-data/parse_data.py -t
 
-You have two options for parsing the data. Running with defaults creates a .xyz file that can be used to create a 3D model. Adding the -g flag will attempt to geolocate the IP addresses and output an html file with a google map in it. This requires that you download the database from [https://lite.ip2location.com/database-ip-country-region-city-latitude-longitude-zipcode-timezone](https://lite.ip2location.com/database-ip-country-region-city-latitude-longitude-zipcode-timezone)
+You have two options for parsing the data. Running with defaults creates a .xyz file that can be used to create a 3D model. Adding the -t flag will output a text file that can be uploaded at the [http://s-1lab.org/project/manifest-data/#upload](Manifest Data project page) to display a Google map of your connections.
 
 Additional options:
 * -o = specify custom output filename
