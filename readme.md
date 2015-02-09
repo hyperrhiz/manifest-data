@@ -58,7 +58,8 @@ sudo python /path/to/manifest-data/manifest_data.py
 You will be prompted to enter your admin password every time you run this. This will create a folder called "tcpflow" in the application directory where it will save all the files. You can delete these whenever you want.
 
 Additional options:
-*-o = set custom output folder for tcpflow data
+
+* -o = set custom output folder for tcpflow data
 
 -----------------------------------------------------
 
@@ -72,6 +73,9 @@ python ~/manifest-data/parse_data.py -t
 You have two options for parsing the data. Running with defaults creates a .xyz file that can be used to create a 3D model. Adding the -t flag will output a text file that can be uploaded at the [Manifest Data project page](http://s-1lab.org/project/manifest-data/#upload) to display a Google map of your connections.
 
 Additional options:
+
 * -o = specify custom output filename
+
 * -i = specify custom tcpflow input directory
+
 * -v = prints out more information
