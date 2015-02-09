@@ -66,9 +66,13 @@ Additional options:
 Parsing
 ------------
 To parse the IP addresses from the files, run the following command in a terminal:
+```
 python /Applications/Manifest_Data/parse_data.py
+```
 or
+```
 python ~/manifest-data/parse_data.py -t
+```
 
 You have two options for parsing the data. Running with defaults creates a .xyz file that can be used to create a 3D model. Adding the -t flag will output a text file that can be uploaded at the [Manifest Data project page](http://s-1lab.org/project/manifest-data/#upload) to display a Google map of your connections.
 
