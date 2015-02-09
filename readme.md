@@ -11,13 +11,10 @@ License: Creative Commons BY-NC-SA 4.0 [http://creativecommons.org/licenses/by-n
 This project uses geolocation data derived from [http://www.ip2location.com](http://www.ip2location.com).
 
 This project also uses pygmaps, distributed under the Apache 2.0 license.
----------------------------------------------------------------------------------------------------------------------------
-DMG installer
---------------
-FOR MAC ONLY
 
-Installation
--------------
+--------------------------------------------------------------------------------------------------------------
+## OS X Installation ##
+
 To install tcpflow and scripts for this project download and mount [the DMG installer](https://bitbucket.org/swibble/manifest-data/downloads/manifest-data.dmg). Open a terminal and enter the following command:
 ```
 sh /Volumes/MANIFESTD/install.sh
