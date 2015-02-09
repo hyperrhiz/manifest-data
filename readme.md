@@ -38,7 +38,10 @@ Clone repository
 ```
 git clone https://bitbucket.org/swibble/manifest-data ~/manifest-data
 ```
-Run ~/manifest-data/linux_setup.sh
+Run 
+```
+sh ~/manifest-data/linux_setup.sh
+```
 
 This will install tcpflow and other dependencies.
 
