@@ -19,12 +19,12 @@ FOR MAC ONLY
 Installation
 -------------
 To install tcpflow and scripts for this project download and mount [the DMG installer](https://bitbucket.org/swibble/manifest-data/downloads/manifest-data.dmg). Open a terminal and enter the following command:
+```
 sh /Volumes/MANIFESTD/install.sh
-
+```
 You will be prompted to enter your password for the install to proceed.
 
-You will also need to install the X11 framework. You can download it here.
-[http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg](http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg)
+You will also need to install the X11 framework. You can [download it here](http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg).
 
 --------------------------------------------------------------------------------------------------------------
 ## Linux Installation ##
