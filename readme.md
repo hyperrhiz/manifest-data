@@ -18,7 +18,7 @@ FOR MAC ONLY
 
 Installation
 -------------
-To install tcpflow and scripts for this project download and mount [https://bitbucket.org/swibble/manifest-data/downloads/manifest-data.dmg](the DMG installer). Open a terminal and enter the following command:
+To install tcpflow and scripts for this project download and mount [the DMG installer](https://bitbucket.org/swibble/manifest-data/downloads/manifest-data.dmg). Open a terminal and enter the following command:
 sh /Volumes/MANIFESTD/install.sh
 
 You will be prompted to enter your password for the install to proceed.
@@ -63,7 +63,7 @@ python /Applications/Manifest_Data/parse_data.py
 or
 python ~/manifest-data/parse_data.py -t
 
-You have two options for parsing the data. Running with defaults creates a .xyz file that can be used to create a 3D model. Adding the -t flag will output a text file that can be uploaded at the [http://s-1lab.org/project/manifest-data/#upload](Manifest Data project page) to display a Google map of your connections.
+You have two options for parsing the data. Running with defaults creates a .xyz file that can be used to create a 3D model. Adding the -t flag will output a text file that can be uploaded at the [Manifest Data project page](http://s-1lab.org/project/manifest-data/#upload) to display a Google map of your connections.
 
 Additional options:
 * -o = specify custom output filename
