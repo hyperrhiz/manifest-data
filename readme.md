@@ -28,12 +28,16 @@ You will also need to install the X11 framework. You can download it here.
 
 --------------------------------------------------------------------------------------------------------------
 ## Linux Installation ##
-Clone/download repository.
 
 Install git
-sudo apt-get update && sudo apt-get -y install git
-git clone https://bitbucket.org/swibble/manifest-data ~/manifest-data
 
+```
+sudo apt-get update && sudo apt-get -y install git
+```
+Clone repository
+```
+git clone https://bitbucket.org/swibble/manifest-data ~/manifest-data
+```
 Run ~/manifest-data/linux_setup.sh
 
 This will install tcpflow and other dependencies.
@@ -44,15 +48,17 @@ This will install tcpflow and other dependencies.
 Running
 -------------
 Open a terminal and run the following command:
+```
 sudo python /Applications/Manifest_Data/manifest_data.py
-
+```
 or
+```
 sudo python /path/to/manifest-data/manifest_data.py
-
+```
 You will be prompted to enter your admin password every time you run this. This will create a folder called "tcpflow" in the application directory where it will save all the files. You can delete these whenever you want.
 
 Additional options:
-* -o = set custom output folder for tcpflow data
+*-o = set custom output folder for tcpflow data
 
 -----------------------------------------------------
 
