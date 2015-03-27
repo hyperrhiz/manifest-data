@@ -87,6 +87,13 @@ Additional options:
 
 * -o = set custom output folder for tcpflow data
 
+**Important:**
+When you wish to stop collection, make sure to **go to the terminal window and press ctrl-c**. If you do not, you will encounter problems parsing the data that you have collected.
+
+When you switch locations, you should also close the script with ctrl-c and restart it.
+
+If you close the window without hitting ctrl-c, all files will be owned by root rather than by your user, making them impossible to read without changing file permissions. Also, the IP address data will be corrupted and will contain internal IP addresses rather than external ones, making them impossible to geolocate.
+
 -----------------------------------------------------
 
 Parsing
