@@ -13,6 +13,20 @@ This project uses geolocation data derived from [http://www.ip2location.com](htt
 This project also uses pygmaps, distributed under the Apache 2.0 license.
 
 --------------------------------------------------------------------------------------------------------------
+## tcpflow ##
+
+This project relies upon the [tcpflow](http://manpages.ubuntu.com/manpages/hardy/man1/tcpflow.1.html) networking utility to collect networking data locally on your machine. When running, tcpflow will collect the content and metadata associated with all networking calls your computer makes. 
+
+## Privacy ##
+The information this program collects is potentially sensitive. Networking connections that utilize SSL will be stored in an encrypted state, but will reveal other metadata such as IP addresses, mime-type, timestamp, and filesize.
+
+This information is not transmitted to anyone and is stored locally on your machine in a default folder called "tcpflow." Feel free to remove this folder when your experiments are complete.
+
+The only information that is transmitted to us is if you choose to create a Google map of your connections. This will involve sending a list of IP addresses to the S-1lab.org server where the IP addresses will be geolocated and mapped. The original file with the IP addresses will not be saved. If you choose to save your Google map to our public gallery, your map is assigned an anonymous identifier. The maps include only the GPS coordinates for your networking connections, not any IP address or timestamp information.
+
+If you would like to examine the server code used to generate the maps (using Flask), you can find it in Source --> manifest-data --> __init__.py 
+
+--------------------------------------------------------------------------------------------------------------
 ## OS X Installation ##
 
 To install tcpflow and scripts for this project download and mount [the DMG installer](https://bitbucket.org/swibble/manifest-data/downloads/manifest-data.dmg). Open a terminal and enter the following command:
@@ -22,6 +36,17 @@ sh /Volumes/MANIFESTD/install.sh
 You will be prompted to enter your password for the install to proceed.
 
 You will also need to install the X11 framework. You can [download it here](http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg).
+
+install.sh copies the following libraries necessary for tcpflow to run:
+libcairo.2.dylib
+libfontconfig.1.dylib
+libfreetype.6.dylib
+libpixman-1.0.dylib
+libpng15.15.dylib
+
+These files are all copied to /usr/local/lib/.
+
+tcpflow is copied to /usr/local/bin/.
 
 --------------------------------------------------------------------------------------------------------------
 ## Linux Installation ##
