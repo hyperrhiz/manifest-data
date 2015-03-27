@@ -4,7 +4,7 @@ Manifest Data
 
 Duke University S-1 Speculative Sensation Lab
 
-[http://s-1lab.org](http://s-1lab.org)
+[http://s-1lab.org/project/manifest-data/](http://s-1lab.org/project/manifest-data/)
 
 License: Creative Commons BY-NC-SA 4.0 [http://creativecommons.org/licenses/by-nc-sa/4.0/](http://creativecommons.org/licenses/by-nc-sa/4.0/)
 
