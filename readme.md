@@ -38,6 +38,7 @@ You will be prompted to enter your password for the install to proceed.
 **You will also need to install the X11 framework**. You can [download it here](http://xquartz.macosforge.org/downloads/SL/XQuartz-2.7.5.dmg).
 
 install.sh copies the following libraries necessary for tcpflow to run:
+
 * libcairo.2.dylib
 * libfontconfig.1.dylib
 * libfreetype.6.dylib
