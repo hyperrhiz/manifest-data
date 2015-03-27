@@ -87,7 +87,7 @@ Additional options:
 
 * -o = set custom output folder for tcpflow data
 
-**Important:**
+##Important:##
 When you wish to stop collection, make sure to **go to the terminal window and press ctrl-c**. If you do not, you will encounter problems parsing the data that you have collected.
 
 When you switch locations, you should also close the script with ctrl-c and restart it.
