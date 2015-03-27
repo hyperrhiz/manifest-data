@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
-## Author: 	Luke Caldwell
+## Author:  Luke Caldwell
 ## Org: Duke University S-1 Speculative Sensation Lab
 ## Website: http://s-1lab.org
 ## License: Creative Commons BY-NC-SA 4.0
-##			http://creativecommons.org/licenses/by-nc-sa/4.0/
+##          http://creativecommons.org/licenses/by-nc-sa/4.0/
 
 import os
 import urllib2
@@ -13,6 +13,7 @@ import socket
 import getpass
 import platform
 import glob
+import re
 
 class StatusCodeError(Exception):
     pass
@@ -21,11 +22,11 @@ class TCPFlowError(Exception):
     pass
 
 ###########################################################
-#	Checks
+#   Checks
 ###########################################################
 
-#	For fixing file permissions because script is run as
-#	root
+#   For fixing file permissions because script is run as
+#   root
 try:
     with open(os.path.join(os.path.dirname(__file__), '.ids'), 'rb') as ids:
         UID, GID = ids.read().split()
@@ -43,7 +44,7 @@ if not getpass.getuser() == 'root':
 
 
 ###########################################################
-#	For fixing IP Addresses
+#   For fixing IP Addresses
 ###########################################################
 
 def pad_ip_address(s):
@@ -141,10 +142,20 @@ def main():
 
     #   This starts tcpflow and runs it until ctrl-c is
     #   pressed.
-    interfaces = ["en0", "en1", "eth0","eth1","eth2","wlan0","wlan1","wifi0",
+    interfaces = ["en1", "eth0","eth1","eth2","wlan0","wlan1", "en0", "wifi0",
                   "ath0","ath1","ppp0"]
+
+    if PLATFORM == "Darwin":
+        proc = subprocess.Popen(["ifconfig"], stdout=subprocess.PIPE,
+                                stderr=subprocess.PIPE)
+        out, err = proc.communicate()
+        istr = "|".join(interfaces)
+        adapters = re.findall(r'({}).*?status: (.*?)\n'.format(istr), out, flags=re.S)
+        interfaces = [x[0] for x in adapters if x[1] == "active"]
+        
     try:
         for iface in interfaces:
+            print("trying interface: {}".format(iface))
             _args = [tcpflow, '-a', '-Ft', '-o',OUTPUT, '-i', iface]
             proc = subprocess.Popen(_args, stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
@@ -160,9 +171,9 @@ def main():
         print('Cleaning up...')
         fix_filenames(internal_ip, external_ip, OUTPUT)
 
-        #	Need to fix file permissions because tcpflow
-        #	requires running as root and therefore creates
-        #	output files as root.
+        #   Need to fix file permissions because tcpflow
+        #   requires running as root and therefore creates
+        #   output files as root.
         print('Fixing file permissions...')
         subprocess.call('chown -R {0}:{1} {2}'.format(UID, GID, OUTPUT), shell=True)
         print('all done!')
