@@ -174,6 +174,8 @@ def main():
     with open(args.output, 'wb') as f:
             f.write(output)
     print('Success! You can find your file at {}'.format(args.output))
+    if args.txt:
+        print('Upload this file to http://s-1lab.org/project/manifest-data/#upload')
 
 
 if __name__ == "__main__":
