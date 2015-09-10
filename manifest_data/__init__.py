@@ -53,12 +53,6 @@ regex_validator = re.compile('^{r}\.{r}\.{r}\.{r},'
                              '{r}\.{r}\.{r}\.{r}$'.format(r='\d{1,3}')
 )
 
-# @app.route('/gallery/<path:filename>')
-# def serve_static_map(filename):
-#     print(app.config['GAL_DIR'])
-#     return send_from_directory(app.config['GAL_DIR'], filename)
-
-
 def geolocate_ips(files, keep):
     """
     create google map of geolocated IP addresses with paths
