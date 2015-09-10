@@ -10,6 +10,6 @@ OUT=$DIR/.ids
 id -u > $OUT
 id -g >> $OUT
 
-## Install tcpflow and link it to /usr/local/bin
+## Install tcpflow
 sudo apt-get update && sudo apt-get install tcpflow
 echo 'Setup complete!'
