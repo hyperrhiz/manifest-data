@@ -15,7 +15,7 @@ This project also uses pygmaps, distributed under the Apache 2.0 license.
 --------------------------------------------------------------------------------------------------------------
 ## tcpflow ##
 
-This project relies upon the [tcpflow](http://manpages.ubuntu.com/manpages/hardy/man1/tcpflow.1.html) networking utility to collect networking data locally on your machine. When running, tcpflow will collect the content and metadata associated with all networking calls your computer makes. 
+This project relies upon the [tcpflow](http://manpages.ubuntu.com/manpages/hardy/man1/tcpflow.1.html) networking utility to collect networking data locally on your machine. When running, tcpflow will collect the content and metadata associated with all networking calls your computer makes. TCPFLOW was created by [Jeremy Elson](http://www.circlemud.org/~jelson/software/tcpflow) and is maintained by [Simson Garfinkel](https://github.com/simsong/tcpflow). TCPFLOW is released under the GNU General Public License Version 3.
 
 ## Privacy ##
 The information this program collects is potentially sensitive. Networking connections that utilize SSL will be stored in an encrypted state, but will reveal other metadata such as IP addresses, mime-type, timestamp, and filesize.
