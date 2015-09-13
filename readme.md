@@ -90,7 +90,7 @@ When you switch locations, you should also close the script with ctrl-c and rest
 
 If you close the window without hitting ctrl-c, all files will be owned by root rather than by your user, making them impossible to read without changing file permissions. Also, the IP address data will be corrupted and will contain internal IP addresses rather than external ones, making them impossible to geolocate.
 
------------------------------------------------------
+--------------------------------------------------------------------------------------------------------------
 
 Parsing
 ------------
@@ -114,3 +114,21 @@ Additional options:
 * -i = specify custom tcpflow input directory
 
 * -v = prints out more information
+
+--------------------------------------------------------------------------------------------------------------
+
+Creating a 3-D Model
+--------------------
+These instructions pertain to the open source software [MeshLab](http://meshlab.sourceforge.net/). 
+
+After parsing the data into a .xyz file, go to 
+
+* File -> Import Mesh -> select .xyz file
+
+* Render -> Render Mode -> Points
+
+* Filters -> Normals, Curvatures and Orientation -> Compute Normals for point sets (apply the default and then close the dialog box)
+
+* Filters -> Remeshing, Simplification and Reconstruction -> Surface Reconstruction: Poisson (apply and close the dialog box) 
+
+You now have a data creature! Feel free to parse the data and import the model again to see other variants from the same dataset. 
