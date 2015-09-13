@@ -6,6 +6,7 @@
 ## License: Creative Commons BY-NC-SA 4.0
 ##			http://creativecommons.org/licenses/by-nc-sa/4.0/
 
+
 """
 run using:
 python (path_to)/parse_ip.py
@@ -25,6 +26,8 @@ options:
 -v displays more information to the console.
 
 """
+
+
 from __future__ import print_function
 import os
 import glob
@@ -46,7 +49,7 @@ parser.add_argument('-i', '--input', dest="input", action="store",
 parser.add_argument('-o', '--output', dest="output", action="store",
                     default=os.path.join(BASE_DIR, 'tcpflow-' + DATE + '.xyz'),
                     help="""Sets output file for results. Can be either full
-					path or path relative to tcpflow directory""")
+                    path or path relative to tcpflow directory""")
 parser.add_argument('-v', '--verbose', dest='debug', action="store_true",
                     default=False, help="Displays more information to console.")
 args = parser.parse_args()
@@ -80,16 +83,6 @@ spl = re.compile(
 )
 
 
-def logger(*s):
-    """
-    :param s: list of strings
-
-    Prints if verbose setting is active.
-    """
-    if args.debug:
-        print(*s)
-
-
 class XYZData:
     """
     data wrapper for xyz data
@@ -104,6 +97,7 @@ class XYZData:
         # replace . in ip addresses so we can divide it
         d = dict((k, int(v.replace('.', ''))) for k, v in kwargs.iteritems())
         self.__dict__.update(d)
+
 
 class LocData:
     """
@@ -120,6 +114,16 @@ class LocData:
         """
         a = s.split('.')
         return '.'.join([z.lstrip('0') for z in a])
+
+
+def logger(*s):
+    """
+    :param s: list of strings
+
+    Prints if verbose setting is active.
+    """
+    if args.debug:
+        print(*s)
 
 
 def split_name(f):

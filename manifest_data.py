@@ -6,6 +6,7 @@
 ## License: Creative Commons BY-NC-SA 4.0
 ##          http://creativecommons.org/licenses/by-nc-sa/4.0/
 
+
 import os
 import urllib2
 import subprocess
@@ -15,11 +16,14 @@ import platform
 import glob
 import re
 
+
 class StatusCodeError(Exception):
     pass
 
+
 class TCPFlowError(Exception):
     pass
+
 
 class IPV6Error(Exception):
     pass
@@ -50,19 +54,23 @@ if not getpass.getuser() == 'root':
 #   For fixing IP Addresses
 ###########################################################
 
+
 def pad_ip_address(s):
     """
     add zero padding for ip address
     :param s: string ip address
     """
+
     s = [int(i) for i in s.split('.')]
     return '{:03d}.{:03d}.{:03d}.{:03d}'.format(*s)
+
 
 def get_external_ip():
     """
     pings external website to get external ip address
     to replace internal ip address in file output
     """
+
     urls = ['http://ifconfig.co', 'http://ifconfig.me']
     headers = {'User-Agent': 'curl/'}
     for url in urls:
@@ -81,8 +89,8 @@ def get_external_ip():
             except ValueError:
                 if ":" in ip:
                     print('\033[91m\nIt looks like you are connecting from an IPv6 address. Google maps functionality will '
-                    'unfortunately be broken for the data collected during this session.\n\nRestarting this script '
-                    'might resolve the problem.\n\033[0m')
+                          'unfortunately be broken for the data collected during this session.\n\nRestarting this script '
+                          'might resolve the problem.\n\033[0m')
             return None
     else:
         raise e
@@ -120,6 +128,7 @@ def fix_filenames(i, e, d):
 
 ###########################################################
 
+
 def main():
 
     print("outputting files to {}".format(OUTPUT))
@@ -138,7 +147,6 @@ def main():
     external_ip = get_external_ip()
     internal_ip = get_internal_ip()
 
-
     print("starting tcpflow... you are being watched.\n")
     print('press ctrl-c to exit\n')
 
@@ -149,12 +157,12 @@ def main():
         tcpflow = [p for p in paths if os.path.isfile(p)][0]
     except IndexError:
         raise TCPFlowError('Please make sure TCPFlow is installed correctly. '
-                            'Run the setup file, if you haven\'t already.')
+                           'Run the setup file, if you haven\'t already.')
 
     #   This starts tcpflow and runs it until ctrl-c is
     #   pressed.
-    interfaces = ["en1", "eth0","eth1","eth2","wlan0","wlan1", "en0", "wifi0",
-                  "ath0","ath1","ppp0"]
+    interfaces = ["en1", "eth0", "eth1", "eth2", "wlan0", "wlan1", "en0", "wifi0",
+                  "ath0", "ath1", "ppp0"]
 
     if PLATFORM == "Darwin":
         proc = subprocess.Popen(["ifconfig"], stdout=subprocess.PIPE,
@@ -163,10 +171,10 @@ def main():
         istr = "|".join(interfaces)
         adapters = re.findall(r'({}).*?status: (.*?)\n'.format(istr), out, flags=re.S)
         interfaces = [x[0] for x in adapters if x[1] == "active"]
-        
+
     try:
         for iface in interfaces:
-            _args = [tcpflow, '-a', '-Ft', '-o',OUTPUT, '-i', iface]
+            _args = [tcpflow, '-a', '-Ft', '-o', OUTPUT, '-i', iface]
             proc = subprocess.Popen(_args, stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
             out, err = proc.communicate()
