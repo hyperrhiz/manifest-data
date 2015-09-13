@@ -111,6 +111,8 @@ You have two options for parsing the data. Running with defaults creates a .xyz 
 
 Additional options:
 
+* -t = create a text file for transformation into a Google Map of geolocated data connections
+
 * -o = specify custom output filename
 
 * -i = specify custom tcpflow input directory

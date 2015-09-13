@@ -7,6 +7,7 @@
 ##          http://creativecommons.org/licenses/by-nc-sa/4.0/
 
 import os
+import sys
 import urllib2
 import subprocess
 import socket
@@ -19,6 +20,9 @@ class StatusCodeError(Exception):
     pass
 
 class TCPFlowError(Exception):
+    pass
+
+class IPV6Error(Exception):
     pass
 
 ###########################################################
@@ -55,7 +59,6 @@ def pad_ip_address(s):
     s = [int(i) for i in s.split('.')]
     return '{:03d}.{:03d}.{:03d}.{:03d}'.format(*s)
 
-
 def get_external_ip():
     """
     pings external website to get external ip address
@@ -73,8 +76,16 @@ def get_external_ip():
             print('There was an error connecting to {}... trying something else.'.format(url))
         else:
             ip = r.read().strip()
+            ip = "afksjdhf:adafkhjsa"
             print("Your external IP address is {}".format(ip))
-            return pad_ip_address(ip)
+            try:
+                return pad_ip_address(ip)
+            except ValueError:
+                if ":" in ip:
+                    print('\033[91m\nYou are connecting from an IPv6 address. Google maps functionality will '
+                    'unfortunately be broken for the data collected during this session.\n\nRestarting this script '
+                    'might resolve the problem.\n\033[0m')
+            return None
     else:
         raise e
 
@@ -104,7 +115,6 @@ def fix_filenames(i, e, d):
     """
     d += '/*'
     files = glob.glob(d)
-    print(files)
     for f in files:
         if i in f:
             new = f.replace(i, e)
@@ -125,8 +135,11 @@ def main():
 
     #   Retrieve internal and external IP addresses to
     #   allow replacement when program is terminated.
+    #
+    #   If external_ip is IPv6, return will be None.
     external_ip = get_external_ip()
     internal_ip = get_internal_ip()
+
 
     print("starting tcpflow... you are being watched.\n")
     print('press ctrl-c to exit\n')
@@ -155,7 +168,6 @@ def main():
         
     try:
         for iface in interfaces:
-            print("trying interface: {}".format(iface))
             _args = [tcpflow, '-a', '-Ft', '-o',OUTPUT, '-i', iface]
             proc = subprocess.Popen(_args, stdout=subprocess.PIPE,
                                     stderr=subprocess.PIPE)
@@ -169,7 +181,10 @@ def main():
         #   Fixes filenames to replace internal with
         #   external IP addresses.
         print('Cleaning up...')
-        fix_filenames(internal_ip, external_ip, OUTPUT)
+
+        #   If external_ip is IPv6 (ie None), don't replace it
+        if external_ip:
+            fix_filenames(internal_ip, external_ip, OUTPUT)
 
         #   Need to fix file permissions because tcpflow
         #   requires running as root and therefore creates
@@ -180,8 +195,8 @@ def main():
     else:
         #   This means all adapters have been tried and none
         #   found working.
-        raise TCPFlowError('TCPFlow couldn\'t find a working adapter. '
-                           'Is your networking card active?')
+        raise TCPFlowError("TCPFlow couldn't find a working adapter. "
+                           "Is your networking card active?")
 
 if __name__ == '__main__':
     main()
