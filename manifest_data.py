@@ -7,7 +7,6 @@
 ##          http://creativecommons.org/licenses/by-nc-sa/4.0/
 
 import os
-import sys
 import urllib2
 import subprocess
 import socket
@@ -76,13 +75,12 @@ def get_external_ip():
             print('There was an error connecting to {}... trying something else.'.format(url))
         else:
             ip = r.read().strip()
-            ip = "afksjdhf:adafkhjsa"
             print("Your external IP address is {}".format(ip))
             try:
                 return pad_ip_address(ip)
             except ValueError:
                 if ":" in ip:
-                    print('\033[91m\nYou are connecting from an IPv6 address. Google maps functionality will '
+                    print('\033[91m\nIt looks like you are connecting from an IPv6 address. Google maps functionality will '
                     'unfortunately be broken for the data collected during this session.\n\nRestarting this script '
                     'might resolve the problem.\n\033[0m')
             return None

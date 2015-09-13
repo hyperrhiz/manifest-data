@@ -83,10 +83,6 @@ sudo python /path/to/manifest-data/manifest_data.py
 ```
 You will be prompted to enter your admin password every time you run this. This will create a folder called "tcpflow" in the application directory where it will save all the files. You can delete these whenever you want.
 
-Additional options:
-
-* -o = set custom output folder for tcpflow data
-
 ##Important:##
 When you wish to stop collection, make sure to **go to the terminal window and press ctrl-c**. If you do not, you will encounter problems parsing the data that you have collected.
 
