@@ -28,9 +28,9 @@ app.config['GAL_DIR'] = os.path.join(app.config['STATIC_FILES'], 'gallery')
 def root():
     return '<html><body><h1>Welcome to the Manifest Data Project</h1><p><a href="/map">Please submit data here</a></p></body></html>'
 
+
 @app.route('/map', methods=['GET', 'POST'])
 def google_map_form():
-    errors = None
     if request.method == 'POST':
         file = request.files.get('file')
         if file:
@@ -40,6 +40,7 @@ def google_map_form():
             return render_template('map_output.html', output=output)
     else:
         return render_template('file_upload.html')
+
 
 @app.route('/gallery')
 def map_gallery():
@@ -51,7 +52,8 @@ def map_gallery():
 
 regex_validator = re.compile('^{r}\.{r}\.{r}\.{r},'
                              '{r}\.{r}\.{r}\.{r}$'.format(r='\d{1,3}')
-)
+                             )
+
 
 def geolocate_ips(files, keep):
     """
@@ -129,6 +131,7 @@ def geolocate(locobj, ip):
         return (0.0, 0.0)
 
     return (req.latitude, req.longitude)
+
 
 if __name__ == '__main__':
     app.run()
