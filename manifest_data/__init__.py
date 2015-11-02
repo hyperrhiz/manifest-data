@@ -94,12 +94,18 @@ def geolocate_ips(files, keep):
         dest_latlong = geolocate(locobj, dest)
         out = [orig_latlong, dest_latlong]
         s.append(out)
-    for path in s:
-        if (0.0, 0.0) not in path:
-            #	sets random hex color for gmaps path
-            r = lambda: random.randint(0, 255)
-            h = '#%02X%02X%02X' % (r(), r(), r())
-            mymap.addpath(path, h)
+    paths = [p for p in s if (0.0, 0.0) not in p]
+
+    #   no valid gps points found
+    if not paths:
+        return 'http://manifest.s-1lab.org/static/gallery/error.html'
+
+    # valid gps found
+    for path in paths:
+        #	sets random hex color for gmaps path
+        r = lambda: random.randint(0, 255)
+        h = '#%02X%02X%02X' % (r(), r(), r())
+        mymap.addpath(path, h)
     addendum = """
                 <html>
                     <body>
