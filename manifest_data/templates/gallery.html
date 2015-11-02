@@ -1,3 +1,4 @@
-{% for link, ctime in links %}
+{% for val in links %}
+	{% set link, ctime = val %}
     <li><a href="http://manifest.s-1lab.org/static/gallery/{{link}}" target="_blank">{{ctime}}</a></li>
 {% endfor %}
