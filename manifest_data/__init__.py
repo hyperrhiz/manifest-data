@@ -136,8 +136,8 @@ def geolocate_ips(files, keep):
 
 
 def time_format(f):
-    mtime = os.stat.ST_MTIME(f)
-    dt = datetime.fromtimestamp(mtime)
+    mtime = os.stat(f).st_mtime
+    dt = datetime.datetime.fromtimestamp(mtime)
     return dt.strftime('%b %d %Y, %I:%M %p')
 
 
