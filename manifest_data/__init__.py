@@ -14,7 +14,7 @@ import re
 import random
 from uuid import uuid4
 import glob
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, redirect
 import IP2Location
 import pygmaps
 
@@ -37,7 +37,10 @@ def google_map_form():
             keep = request.form.get('keep')
             data = file.read().split()
             output = geolocate_ips(data, keep)
-            return render_template('map_output.html', output=output)
+            if output.startswith('<html>'):
+                return render_template('map_output.html', output=output)
+            elif output.startswith('http'):
+                return redirect(output)
     else:
         return render_template('file_upload.html')
 
@@ -96,15 +99,22 @@ def geolocate_ips(files, keep):
                         http://www.ip2location.com</a></p>
                     </body>
                 </html>"""
+
+    #   saving to the gallery,
+    #   returns url for redirect
     if keep:
+        unique_string = str(uuid4()) + '.html'
+        url_out = os.path.join('http://manifest.s-1lab.org/static/gallery/',
+                               unique_string)
         output = os.path.join(app.config['GAL_DIR'],
-                              str(uuid4()) + '.html')
+                              unique_string)
         mymap.draw(output)
         #	for attribution of IP data
         with open(output, 'ab') as fi:
             fi.write(addendum)
-        with open(output, 'rb') as fi:
-            html = fi.read()
+        html = url_out
+
+    #   create tmp file and return contents and delete
     else:
         output = os.path.join(os.path.dirname(__file__), 'tmp', str(uuid4()))
         mymap.draw(output)
