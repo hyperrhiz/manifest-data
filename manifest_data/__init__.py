@@ -12,6 +12,7 @@
 import os
 import re
 import random
+import datetime
 from uuid import uuid4
 import glob
 from flask import Flask, render_template, request, send_from_directory, redirect
@@ -49,7 +50,7 @@ def google_map_form():
 def map_gallery():
     gal_dir = os.path.join(app.config['GAL_DIR'], '*.html')
     print(gal_dir)
-    files = [os.path.basename(f) for f in glob.glob(gal_dir)]
+    files = [(os.path.basename(f), time_format(f)) for f in glob.glob(gal_dir)]
     return render_template('gallery.html', links=files)
 
 
@@ -125,6 +126,12 @@ def geolocate_ips(files, keep):
             html += addendum
         os.unlink(output)
     return html
+
+
+def time_format(f):
+    mtime = os.stat.ST_MTIME(f)
+    dt = datetime.fromtimestamp(mtime)
+    return dt.strftime('%b %d %Y, %I:%M %p')
 
 
 def geolocate(locobj, ip):
