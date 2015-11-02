@@ -98,14 +98,14 @@ def geolocate_ips(files, keep):
 
     #   no valid gps points found
     if not paths:
-        return """
-        <html>
+        err = """<html>
             <h2>No GPS points found :(</h2>
 
             <p>Sorry, the file you uploaded is either corrupt, improperly formatted, 
             or entirely using IPv6 addresses. 
             Please try again with a new capture.</p>
         </html>"""
+        return err
 
     # valid gps found
     for path in paths:
