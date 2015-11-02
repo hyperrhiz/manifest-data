@@ -56,8 +56,9 @@ def google_map_form():
 @app.route('/gallery')
 def map_gallery():
     gal_dir = os.path.join(app.config['GAL_DIR'], '*.html')
-    print(gal_dir)
-    files = [GalleryFile(f) for f in glob.glob(gal_dir)]
+    filenames = sorted(glob.glob(gal_dir), key=lambda f: os.stat(f).st_mtime,
+                       reverse=True)
+    files = [GalleryFile(f) for f in filenames]
     return render_template('gallery.html', links=files)
 
 
