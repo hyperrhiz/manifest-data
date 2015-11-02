@@ -25,6 +25,13 @@ app.config['STATIC_FILES'] = os.path.join(os.path.dirname(__file__), 'static')
 app.config['GAL_DIR'] = os.path.join(app.config['STATIC_FILES'], 'gallery')
 
 
+class GalleryFile():
+
+    def __init__(self, fn):
+        self.link = os.path.basename(fn)
+        self.time = time_format(fn)
+
+
 @app.route('/')
 def root():
     return '<html><body><h1>Welcome to the Manifest Data Project</h1><p><a href="/map">Please submit data here</a></p></body></html>'
@@ -50,7 +57,7 @@ def google_map_form():
 def map_gallery():
     gal_dir = os.path.join(app.config['GAL_DIR'], '*.html')
     print(gal_dir)
-    files = [(os.path.basename(f), time_format(f)) for f in glob.glob(gal_dir)]
+    files = [GalleryFile(f) for f in glob.glob(gal_dir)]
     return render_template('gallery.html', links=files)
 
 
